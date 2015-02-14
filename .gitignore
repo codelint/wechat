@@ -5,3 +5,5 @@ phpinfo.php
 .DS_Store
 *.bz2
 *.gz
+
+/demo/
