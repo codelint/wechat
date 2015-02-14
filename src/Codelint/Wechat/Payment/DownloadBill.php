@@ -1,4 +1,4 @@
-<?php namespace Codelint\Wechat\Sdk;
+<?php namespace Codelint\Wechat\Payment;
 
 /**
  * 对账单接口

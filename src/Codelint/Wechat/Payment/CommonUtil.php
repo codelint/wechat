@@ -1,4 +1,4 @@
-<?php namespace Codelint\Wechat\Sdk;
+<?php namespace Codelint\Wechat\Payment;
 use Codelint\Wechat\Common\Utils;
 
 /**
@@ -37,7 +37,7 @@ class CommonUtil {
 
     function trimString($value)
     {
-        return static::trimString($value);
+        return Utils::trimString($value);
     }
 
     /**

@@ -71,7 +71,7 @@ class Utils {
         }
         //签名步骤一：按字典序排序参数
         ksort($Parameters);
-        $String = static::_formatBizQueryParaMap($Parameters, false);
+        $String = static::formatBizQueryParaMap($Parameters, false);
         //echo '【string1】'.$String.'</br>';
         //签名步骤二：在string后加入KEY
         $String = $String . "&key=" . $key;

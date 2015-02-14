@@ -12,8 +12,13 @@
     "require": {
         "codelint/php-lang": "dev-master"
     },
+    "require-dev": {
+        "phpunit/phpunit": "4.5.*"
+    },
     "autoload": {
-        "psr-0": {"Codelint\\": "src/"},
+        "psr-0": {
+            "Codelint\\": "src/"
+        },
         "files": [
         ]
     }
