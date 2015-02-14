@@ -1,0 +1,20 @@
+{
+    "name": "codelint/wechat",
+    "description": "helper for wechat open api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "codelint",
+            "email": "codelint@foxmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "codelint/php-lang": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {"Codelint\\": "src/"},
+        "files": [
+        ]
+    }
+}
