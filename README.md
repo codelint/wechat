@@ -1,2 +1,2 @@
 # wechat
-a library to help wechat developer
+a library to help wechat developing
