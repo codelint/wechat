@@ -14,6 +14,9 @@ $ticket = $jsSdk->getJsApiTicket($token);
 $url = array_get($_SERVER, 'HTTP_REFERER', '');
 $config = $jsSdk->getConfigSignature($ticket, $url);
 
+//$api_ticket = $jsSdk->getCardTicket($token);
+//$ext = $jsSdk->getCardSignature($api_ticket, 'p8O_-jogSK_lQz0dyH-C9Plu4f_A');
+//var_dump(json_encode(array_only($ext, ['code', 'openid', 'timestamp', 'signature'])));
 ?>
 
 /*

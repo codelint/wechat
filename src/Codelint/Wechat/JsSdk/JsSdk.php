@@ -12,8 +12,10 @@ use Codelint\Wechat\Common\Utils;
 class JsSdk extends AuthParams {
 
     protected $token_entry = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s';
-    protected $ticket_entry = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi';
+    protected $ticket_entry = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=%s';
 
+    const TICKET_TYPE_JSAPI = 'jsapi';
+    const TICKET_TYPE_CARD = 'wx_card';
 
     public function getToken()
     {
@@ -22,11 +24,11 @@ class JsSdk extends AuthParams {
         return array_get($res, 'access_token', false);
     }
 
-    public function getJsApiTicket($token = false)
+    public function getTicket($type, $token = false)
     {
         if ($token = $token ? $token : $this->getToken())
         {
-            $entry = sprintf($this->ticket_entry, $token);
+            $entry = sprintf($this->ticket_entry, $token, $type);
             $res = Utils::getJSON($entry);
             return array_get($res, 'ticket', false);
         }
@@ -34,6 +36,16 @@ class JsSdk extends AuthParams {
         {
             return false;
         }
+    }
+
+    public function getJsApiTicket($token = false)
+    {
+        return $this->getTicket(static::TICKET_TYPE_JSAPI, $token);
+    }
+
+    public function getCardTicket($token = false)
+    {
+        return $this->getTicket(static::TICKET_TYPE_CARD, $token);
     }
 
     public function getConfigSignature($ticket, $url)
@@ -46,7 +58,7 @@ class JsSdk extends AuthParams {
         );
         ksort($data);
         $sign_str = '';
-        foreach($data as $k => $v)
+        foreach ($data as $k => $v)
         {
             $sign_str .= "&$k=$v";
         }
@@ -54,6 +66,23 @@ class JsSdk extends AuthParams {
         $data['signature'] = sha1($sign_str);
         $data['sign_str'] = $sign_str;
         return array_except($data, 'jsapi_ticket');
+    }
+
+    public function getAddCardSignature($ticket, $card_id, $card_code = '', $balance = '', $openid = '', $timestamp = '1424627413')
+    {
+        $now = $timestamp ? : time();
+        $ret['card_id'] = $card_id;
+        $ret['code'] = $card_code;
+        $ret['timestamp'] = '' . $now;
+        $ret['api_ticket'] = $ticket;
+        $ret['balance'] = $balance;
+        $ret['openid'] = $openid;
+
+        $values = array_values($ret);
+        sort($values, SORT_STRING);
+        $ret['sign_str'] = implode('', $values);
+        $ret['signature'] = strtoupper(sha1($ret['sign_str']));
+        return $ret;
     }
 
     public function getJsApiList()
