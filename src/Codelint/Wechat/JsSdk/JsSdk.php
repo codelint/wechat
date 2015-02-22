@@ -68,7 +68,7 @@ class JsSdk extends AuthParams {
         return array_except($data, 'jsapi_ticket');
     }
 
-    public function getAddCardSignature($ticket, $card_id, $card_code = '', $balance = '', $openid = '', $timestamp = '1424627413')
+    public function getAddCardSignature($ticket, $card_id, $card_code = '', $balance = '', $openid = '', $timestamp = '')
     {
         $now = $timestamp ? : time();
         $ret['card_id'] = $card_id;
