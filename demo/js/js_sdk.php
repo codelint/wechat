@@ -14,6 +14,14 @@ $ticket = $jsSdk->getJsApiTicket($token);
 $url = array_get($_SERVER, 'HTTP_REFERER', '');
 $config = $jsSdk->getConfigSignature($ticket, $url);
 
+//$signature = new \Codelint\Wechat\JsSdk\Card\Signature();
+//$signature->add_data(WxPayConf_pub::APPID);
+//var_dump($nonstr = str_random(16));
+//$signature->add_data($nonstr);
+//var_dump($now = time());
+//$signature->add_data('' . $now);
+//$signature->add_data($jsSdk->getCardTicket($token));
+//var_dump($signature->get_signature());
 //$api_ticket = $jsSdk->getCardTicket($token);
 //$ext = $jsSdk->getCardSignature($api_ticket, 'p8O_-jogSK_lQz0dyH-C9Plu4f_A');
 //var_dump(json_encode(array_only($ext, ['code', 'openid', 'timestamp', 'signature'])));
