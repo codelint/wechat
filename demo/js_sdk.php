@@ -111,6 +111,8 @@
         <button class="btn btn_primary" id="chooseCard">chooseCard</button>
         <span class="desc">查看微信卡包中的卡券接口</span>
         <button class="btn btn_primary" id="openCard">openCard</button>
+        <span class="desc">核销卡券</span>
+        <button class="btn btn_primary" id="consumeCard">consumeCard</button>
 
         <h3 id="menu-pay">微信支付接口</h3>
         <span class="desc">发起一个微信支付请求</span>
@@ -120,6 +122,6 @@
 </body>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="js/js_sdk.php"></script>
-<script src="js/js_sdk_demo.js"></script>
+<script src="js/js_sdk_demo.js?abc=123"></script>
 </html>
 

@@ -467,12 +467,9 @@ wx.ready(function(){
         wx.addCard({
             cardList: [
                 {
-                    cardId: 'pDF3iY9tv9zCGCj4jTXFOo1DxHdo',
-                    cardExt: '{"code": "", "openid": "", "timestamp": "1418301401", "signature":"64e6a7cc85c6e84b726f2d1cbef1b36e9b0f9750"}'
-                },
-                {
-                    cardId: 'pDF3iY9tv9zCGCj4jTXFOo1DxHdo',
-                    cardExt: '{"code": "", "openid": "", "timestamp": "1418301401", "signature":"64e6a7cc85c6e84b726f2d1cbef1b36e9b0f9750"}'
+                    cardId: 'p8O_-jogSK_lQz0dyH-C9Plu4f_A',
+//                    cardExt: '{"code": "", "openid": "", "timestamp": "1418301401", "signature":"64e6a7cc85c6e84b726f2d1cbef1b36e9b0f9750"}'
+                    cardExt: '{"code": "", "openid": "", "timestamp": "1426267800", "signature":"D43B99F3B78BC42AAD8CB29D54B837EF02730C0A"}'
                 }
             ],
             success: function(res){
@@ -484,9 +481,9 @@ wx.ready(function(){
     // 12.2 选择卡券
     document.querySelector('#chooseCard').onclick = function(){
         wx.chooseCard({
-            cardSign: '97e9c5e58aab3bdf6fd6150e599d7e5806e5cb91',
-            timestamp: 1417504553,
-            nonceStr: 'k0hGdSXKZEj3Min5',
+            cardSign: '171884cf541f3957b8f618eeb85375f9f234307f',
+            timestamp: 1426269052,
+            nonceStr: 'nuUxB5oJvVoi7PMP',
             success: function(res){
                 alert('已选择卡券：' + JSON.stringify(res.cardList));
             }
@@ -495,11 +492,17 @@ wx.ready(function(){
 
     // 12.3 查看卡券
     document.querySelector('#openCard').onclick = function(){
-        alert('您没有该公众号的卡券无法打开卡券。');
+        // alert('您没有该公众号的卡券无法打开卡券。');
         wx.openCard({
             cardList: [
             ]
         });
+    };
+
+    // 12.3 核销卡券
+    document.querySelector('#consumeCard').onclick = function(){
+        // alert('您没有该公众号的卡券无法打开卡券。');
+        alert(wx.consumeCard);
     };
 
     var shareData = {

@@ -23,8 +23,9 @@ $config = $jsSdk->getConfigSignature($ticket, $url);
 //$signature->add_data($jsSdk->getCardTicket($token));
 //var_dump($signature->get_signature());
 //$api_ticket = $jsSdk->getCardTicket($token);
-//$ext = $jsSdk->getCardSignature($api_ticket, 'p8O_-jogSK_lQz0dyH-C9Plu4f_A');
+//$ext = $jsSdk->getAddCardSignature($api_ticket, 'p8O_-jogSK_lQz0dyH-C9Plu4f_A');
 //var_dump(json_encode(array_only($ext, ['code', 'openid', 'timestamp', 'signature'])));
+//die();
 ?>
 
 /*

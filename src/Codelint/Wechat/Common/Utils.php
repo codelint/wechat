@@ -150,6 +150,51 @@ class Utils {
         }
     }
 
+    static public function postJSON($url, $data, $cert_path = '', $cert_key = '', $second = 30)
+    {
+        $ch = curl_init();
+        $data = json_encode($data);
+        //超时时间
+        curl_setopt($ch, CURLOPT_TIMEOUT, $second);
+        //这里设置代理，如果有的话
+        //curl_setopt($ch,CURLOPT_PROXY, '8.8.8.8');
+        //curl_setopt($ch,CURLOPT_PROXYPORT, 8080);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        //设置header
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($data)));
+        //要求结果为字符串且输出到屏幕上
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        //设置证书
+        //使用证书：cert 与 key 分别属于两个.pem文件
+        //默认格式为PEM，可以注释
+        curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
+        curl_setopt($ch, CURLOPT_SSLCERT, $cert_path);
+        //默认格式为PEM，可以注释
+        curl_setopt($ch, CURLOPT_SSLKEYTYPE, 'PEM');
+        curl_setopt($ch, CURLOPT_SSLKEY, $cert_key);
+        //post提交方式
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        $data = curl_exec($ch);
+        //返回结果
+        if ($data)
+        {
+            curl_close($ch);
+            return $data;
+        }
+        else
+        {
+            $error = curl_errno($ch);
+            echo '{ "message" : "curl出错，错误码:' . $error . '"<br>';
+            curl_close($ch);
+            return false;
+        }
+    }
+
     /**
      *    作用：以post方式提交xml到对应的接口url
      */

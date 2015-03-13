@@ -13,9 +13,24 @@ class JsSdk extends AuthParams {
 
     protected $token_entry = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s';
     protected $ticket_entry = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=%s';
+    protected $consume_card_entry = 'https://api.weixin.qq.com/card/code/consume?access_token=%s';
 
     const TICKET_TYPE_JSAPI = 'jsapi';
     const TICKET_TYPE_CARD = 'wx_card';
+
+    private $app_id = '';
+    private $app_secret = '';
+    private $cert_path = '';
+    private $cert_key_path = '';
+
+    public function setup($opt)
+    {
+        $this->app_id = array_get($opt, 'app_id', $this->app_id);
+        $this->app_secret = array_get($opt, 'app_secret', $this->app_secret);
+        $this->cert_path = array_get($opt, 'cert_path', $this->cert_path);
+        $this->cert_key_path = array_get($opt, 'cert_key_path', $this->cert_key_path);
+        return $this;
+    }
 
     public function getToken()
     {
@@ -121,5 +136,14 @@ class JsSdk extends AuthParams {
             'addCard',
             'chooseCard',
             'openCard');
+    }
+
+    public function consumeCard($token, $card_id, $card_code)
+    {
+        $entry = sprintf($this->consume_card_entry, $token);
+        return Utils::postJSON($entry, array(
+            'card_id' => $card_id,
+            'code' => $card_code
+        ), $this->cert_path, $this->cert_key_path);
     }
 }
