@@ -10,7 +10,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "codelint/php-lang": "dev-master"
+        "codelint/php-lang": "1.0.*"
     },
     "require-dev": {
         "phpunit/phpunit": "4.5.*"
