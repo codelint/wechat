@@ -66,7 +66,7 @@ class JsSdk extends AuthParams {
     public function getConfigSignature($ticket, $url)
     {
         $data = array(
-            'timestamp' => $this->getAppId(),
+            'timestamp' => ''.time(),
             'noncestr' => str_random(16),
             'url' => $url,
             'jsapi_ticket' => $ticket
