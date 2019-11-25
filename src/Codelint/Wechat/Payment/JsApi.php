@@ -19,16 +19,19 @@ class JsApi extends CommonUtil {
 
     /**
      *    作用：生成可以获得code的url
+     * @param string $redirectUrl
+     * @param string|array $scopes
+     * @return string
      */
-    function createOauthUrlForCode($redirectUrl)
+    function createOauthUrlForCode($redirectUrl, $scopes = 'snsapi_base')
     {
-        $urlObj["appid"] = $this->app_id;
-        $urlObj["redirect_uri"] = "$redirectUrl";
-        $urlObj["response_type"] = "code";
-        $urlObj["scope"] = "snsapi_base";
-        $urlObj["state"] = "STATE" . "#wechat_redirect";
+        $urlObj['appid'] = $this->app_id;
+        $urlObj['redirect_uri'] = strval($redirectUrl);
+        $urlObj['response_type'] = 'code';
+        $urlObj['scope'] = (array)$scopes;
+        $urlObj['state'] = 'STATE' . '#wechat_redirect';
         $bizString = $this->formatBizQueryParaMap($urlObj, false);
-        return "https://open.weixin.qq.com/connect/oauth2/authorize?" . $bizString;
+        return 'https://open.weixin.qq.com/connect/oauth2/authorize?' . $bizString;
     }
 
     /**
@@ -36,13 +39,13 @@ class JsApi extends CommonUtil {
      */
     function createOauthUrlForOpenid()
     {
-        $urlObj["appid"] = $this->app_id;
-//        $urlObj["secret"] = WxPayConf_pub::APPSECRET;
-        $urlObj["secret"] = $this->app_secret;
-        $urlObj["code"] = $this->code;
-        $urlObj["grant_type"] = "authorization_code";
+        $urlObj['appid'] = $this->app_id;
+//        $urlObj['secret'] = WxPayConf_pub::APPSECRET;
+        $urlObj['secret'] = $this->app_secret;
+        $urlObj['code'] = $this->code;
+        $urlObj['grant_type'] = 'authorization_code';
         $bizString = $this->formatBizQueryParaMap($urlObj, false);
-        return "https://api.weixin.qq.com/sns/oauth2/access_token?" . $bizString;
+        return 'https://api.weixin.qq.com/sns/oauth2/access_token?' . $bizString;
     }
 
 
@@ -91,13 +94,13 @@ class JsApi extends CommonUtil {
      */
     public function getParameters()
     {
-        $jsApiObj["appId"] = $this->app_id;
+        $jsApiObj['appId'] = $this->app_id;
         $timeStamp = time();
-        $jsApiObj["timeStamp"] = "$timeStamp";
-        $jsApiObj["nonceStr"] = $this->createNoncestr();
-        $jsApiObj["package"] = "prepay_id=$this->prepay_id";
-        $jsApiObj["signType"] = "MD5";
-        $jsApiObj["paySign"] = $this->getSign($jsApiObj);
+        $jsApiObj['timeStamp'] = strval($timeStamp);
+        $jsApiObj['nonceStr'] = $this->createNoncestr();
+        $jsApiObj['package'] = "prepay_id=$this->prepay_id";
+        $jsApiObj['signType'] = 'MD5';
+        $jsApiObj['paySign'] = $this->getSign($jsApiObj);
         $this->parameters = json_encode($jsApiObj);
 
         return $this->parameters;
