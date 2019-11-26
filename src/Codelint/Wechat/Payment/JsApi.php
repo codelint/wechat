@@ -28,7 +28,7 @@ class JsApi extends CommonUtil {
         $urlObj['appid'] = $this->app_id;
         $urlObj['redirect_uri'] = strval($redirectUrl);
         $urlObj['response_type'] = 'code';
-        $urlObj['scope'] = (array)$scopes;
+        $urlObj['scope'] = implode(' ' , (array)$scopes);
         $urlObj['state'] = 'STATE' . '#wechat_redirect';
         $bizString = $this->formatBizQueryParaMap($urlObj, false);
         return 'https://open.weixin.qq.com/connect/oauth2/authorize?' . $bizString;
